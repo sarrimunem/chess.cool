@@ -55,23 +55,23 @@ export function view(el, model): VNode {
 
     switch (el.getAttribute("data-view")) {
     case 'about':
-        return h('div#placeholder.main-wrapper', aboutView());
+        return h('div#main-wrap', aboutView());
     case 'level8win':
     case 'profile':
-        return h('main.profile', profileView(model));
+        return h('div', profileView(model));
     case 'tv':
     case 'round':
-        return h('div#placeholder.main-wrapper', roundView(model));
+        return h('div#main-wrap', [h('main.round', roundView(model))]);
     case 'analysis':
-        return h('div#placeholder.main-wrapper', analysisView(model));
+        return h('div#main-wrap', [h('main.round', analysisView(model))]);
     case 'editor':
-        return h('div#placeholder.main-wrapper', editorView(model));
+        return h('div#main-wrap', [h('main.round', editorView(model))]);
     case 'games':
-        return h('div#placeholder', gamesView(model));
+        return h('div', gamesView(model));
     case 'thanks':
-        return h('div#placeholder.main-wrapper', h('h2', _('Thank you for your support!')));
+        return h('div#main-wrap', h('h2', _('Thank you for your support!')));
     default:
-        return h('div#placeholder.main-wrapper', lobbyView(model));
+        return h('div#main-wrap', [h('main.lobby', lobbyView(model))]);
     }
 }
 

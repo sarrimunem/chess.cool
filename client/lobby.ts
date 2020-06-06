@@ -64,7 +64,7 @@ class LobbyController {
         if (this._ws.readyState === 1) {
             this.doSend({ type: "get_seeks" });
         };
-        patch(document.getElementById('seekbuttons') as HTMLElement, h('ul#seekbuttons', this.renderSeekButtons()));
+        patch(document.getElementById('seekbuttons') as HTMLElement, h('div#seekbuttons', this.renderSeekButtons()));
         patch(document.getElementById('lobbychat') as HTMLElement, chatView(this, "lobbychat"));
 
         // challenge!
@@ -502,7 +502,7 @@ class LobbyController {
              h('td', seek["tc"]),
              h('td', {attrs: {"data-icon": variantIcon(seek.variant, seek.chess960)}, class: {"icon": true}} ),
              // h('td', {attrs: {"data-icon": (seek.chess960) ? "V" : ""}, class: {"icon": true}} ),
-             h('td', variantName(seek.variant, seek.chess960)),
+             h('td.variant-name', variantName(seek.variant, seek.chess960)),
              h('td', {class: {"tooltip": (seek["fen"])}}, [
                 tooltip,
                 (seek["handicap"]) ? seek["handicap"] : (seek["fen"]) ? _('Custom') : (seek["rated"]) ? _('Rated') : _('Casual')])
@@ -644,8 +644,8 @@ export function lobbyView(model): VNode[] {
     setBoardAndPieceStyles();
 
     return [h('aside.sidebar-first', [ h('div.lobbychat#lobbychat') ]),
-            h('main.main', [ h('table#seeks', {hook: { insert: (vnode) => runSeeks(vnode, model) } }) ]),
-            h('aside.sidebar-second', [ h('ul#seekbuttons') ]),
+            h('div.seeks', [ h('table#seeks', {hook: { insert: (vnode) => runSeeks(vnode, model) } }) ]),
+            h('aside.sidebar-second', [ h('div#seekbuttons') ]),
             h('under-left', [
                 h('a.reflist', {attrs: {href: 'https://discord.gg/aPs8RKr'}}, 'Discord'),
                 h('a.reflist', {attrs: {href: 'https://github.com/gbtami/pychess-variants'}}, 'Github'),
